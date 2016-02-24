@@ -5,7 +5,7 @@ Provide Android developers with a current, up to date example project and guide 
 
 ## Table of Contents
 [Section 1: Intro & Gradle Setup](https://github.com/khuckins/android_databinding_MVVM_guide/tree/master)
-[Section 2: File Structure, Base Classes, and ViewModel](https://github.com/khuckins/android_databinding_MVVM_guide/tree/2-Activities-File-Structure)
+[Section 2: File Structure, Base Classes, and ViewModel](https://github.com/khuckins/android_databinding_MVVM_guide/tree/2-Activities-File-Structure)  
 Section 3: View
 
 ## Why?
