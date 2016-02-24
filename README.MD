@@ -4,7 +4,9 @@
 Provide Android developers with a current, up to date example project and guide regarding creating a Model-View-ViewModel(*MVVM*) architected Android project using native databinding, a feature introduced as of Android Marshmallow(*6.0*).  
 
 ## Table of Contents
-TODO: Fill this out with a link to each branch
+1. [Intro & Gradle Setup](https://github.com/khuckins/android_databinding_MVVM_guide/tree/master)
+2. [File Structure, Base Classes, and ViewModel](https://github.com/khuckins/android_databinding_MVVM_guide/tree/2-Activities-File-Structure)
+3. View
 
 ## Step 1: Setting up our File Structure
 1. As we're using MVVM, to keep our code nice and organized, we're going to create some file structure for our Java classes.  Let's go with something a bit simple.  Create the following folder structure:
@@ -34,4 +36,5 @@ public MainViewModel(Context context) {
 Great! Now we can make use of this ViewModel in our View.  But that's later.  For now, there's one more step:
 4. Creade an Overrided function for our void destroy().  This time, we'll actually give it something to do though.  set `context` to `null`.  Now whenever the ViewModel is destroyed(say, we'ves shut down the app), we'll avoid any potential issues with unexpected data.
 
-TODO: Add Link to next branch
+## [Previous Step: Intro & Gradle Setup](https://github.com/khuckins/android_databinding_MVVM_guide/tree/master)
+## [Next Step: View](https://github.com/khuckins/android_databinding_MVVM_guide/tree/3-View)
