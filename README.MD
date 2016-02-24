@@ -44,4 +44,4 @@ android {
 3. Now we'll need to resync Gradle.
 
 Now that our app is ready for databinding, it's on to the next portion of this guide, which will involve setting up the file structure, and creating our activities.
-[Next Step: File Structure, Base Classes, and ViewModel](https://github.com/khuckins/android_databinding_MVVM_guide/tree/2-Activities-File-Structure)
+## [Next Step: File Structure, Base Classes, and ViewModel](https://github.com/khuckins/android_databinding_MVVM_guide/tree/2-Activities-File-Structure)
