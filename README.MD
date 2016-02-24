@@ -6,40 +6,32 @@ Provide Android developers with a current, up to date example project and guide 
 ## Table of Contents
 TODO: Fill this out with a link to each branch
 
-## Why?
-The possibilities that the new databinding feature affords us include the ability to create cleaner, more testable code.  As I initially went to look for example code, much of what I found, while incredibly useful, also contained various other techniques that, though are good practice, muddle things quite a bit when you're looking for specifically MVVM based on databinding.
-
-## What can I expect from this guide and project?
-By the end of this guide, you will be able to implement Android Databinding and MVVM architecture into your own projects.  We will go through the creation of an Android App, how to enable Databinding, and how to structure your app using MVVM.  Git affords us the ability to use a new branch for each step in the process, at the end of each *README.MD* there will be a link to the next branch.  This will allow you to compare your code with the sample code, while not getting overwhelmed with information from later steps.  
-
-## What do I need?
-- Your IDE of choice(I prefer Android Studio)
-- Java
-- An interest in following this guide
-
-## Step 1: Create your project.
-1. This is the first step to any project.  In Android Studio, we'll create a new project.  As this is an example project, I am using the domain of com.example.
-2. Your SDK setting doesn't matter much, Databinding has been made to support as early as Android 2.1(API level 7+).  I am using API 19: Android Kitkat.
-3. Finally, select "Add No Activity."  You may add in a blank or empty activity if you wish, however you will have to refactor code.
-4. Now we'll wait until Android Studio is done creating our project.
-
-## Step 2: Setting up Gradle
-1. To enable Databinding, our Gradle classpath, which can be found in *build.gradle(Project: ProjectName)* as `com.android.tools.build:gradle`, must be at version 1.5.0 or greater.
-2. In *build.gradle(Module: App)*, we'll be adding a subsection under android, titled dataBinding, with an entry of `enabled = true`.
+## Step 1: Setting up our File Structure
+1. As we're using MVVM, to keep our code nice and organized, we're going to create some file structure for our Java classes.  Let's go with something a bit simple.  Create the following folder structure:
 ```
-android {
-    ...
-
-    defaultConfig {
-        ...
-    }
-
-    dataBinding {
-        enabled = true
-    }
-}
+java/com/example/mvvmsampleproject/
+    /model
+    /view
+    /viewmodel
 ```
-3. Now we'll need to resync Gradle.
+## Step 2: Base Classes
+1. Now that we have this structure built out, let's create some base classes.  This isn't strictly required, but it will help us reduce our code duplication, especially when we apply it to a full project.  In our `view` folder, create `BaseActivity.java`, and in our `viewmodel` folder, create `ViewModel.java`.  
+- ViewModel will be an interface with only a single line, `void destroy();`.  More code may be added to ViewModel depending on what you'll be reusing between multiple ViewModels in your own project.
+- BaseActivity extends AppCompatActivity.  To better support NavigationViews, we'll also implement `NavigationView.onNavigationItemSelectedListener`.  We'll be importing FragmentManager, NavigationView, AppCompatActivity, and MenuItem.  In BaseActivity, we'll go ahead and put in the code to handle onOptionsItemSelected and onNavigationItemSelected
 
-Now that our app is ready for databinding, it's on to the next portion of this guide, which will involve setting up the file structure, and creating our activities.
+2. You could, at this point, use this opportunity to start building out any base models you'd like to use in your app.  This should be fairly straightforward(you're essentially building POJOs), so we won't cover this.  These would be placed in our `model` folder.
+
+## Step 3: Creating our ViewModel
+With our ViewModel ready, let's go ahead and create a new class in our `viewmodel` folder.  Name it `MainViewModel.java`. This ViewModel will be handling our view.  Note that in more complex apps, you'll likely need multiple ViewModels for your Views.  We'll stick to one ViewModel and one View for this tutorial.
+1. Import `Context` and `android.databinding.BaseObservable`.  If BaseObservable is not found, don't worry.  The databinding feature generates several classes, and this is one of them.  Once we've finished section 3, we'll build the project, and Android Studio should have no problem finding BaseObservable.
+2. Now, for the actual class itself, we'll *extend* `BaseObservable` and *implement* `ViewModel`.  This will allow our ViewModel to move information between our views and our models.
+3. Instantiate Context as `context`, then add the following constructor:
+```
+public MainViewModel(Context context) {
+        this.context = context;
+   }
+```
+Great! Now we can make use of this ViewModel in our View.  But that's later.  For now, there's one more step:
+4. Creade an Overrided function for our void destroy().  This time, we'll actually give it something to do though.  set `context` to `null`.  Now whenever the ViewModel is destroyed(say, we'ves shut down the app), we'll avoid any potential issues with unexpected data.
+
 TODO: Add Link to next branch
