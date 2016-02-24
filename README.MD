@@ -4,7 +4,9 @@
 Provide Android developers with a current, up to date example project and guide regarding creating a Model-View-ViewModel(*MVVM*) architected Android project using native databinding, a feature introduced as of Android Marshmallow(*6.0*).  
 
 ## Table of Contents
-TODO: Fill this out with a link to each branch
+[Section 1: Intro & Gradle Setup](https://github.com/khuckins/android_databinding_MVVM_guide/tree/master)
+[Section 2: File Structure, Base Classes, and ViewModel](https://github.com/khuckins/android_databinding_MVVM_guide/tree/2-Activities-File-Structure)
+Section 3: View
 
 ## Why?
 The possibilities that the new databinding feature affords us include the ability to create cleaner, more testable code.  As I initially went to look for example code, much of what I found, while incredibly useful, also contained various other techniques that, though are good practice, muddle things quite a bit when you're looking for specifically MVVM based on databinding.
@@ -42,4 +44,4 @@ android {
 3. Now we'll need to resync Gradle.
 
 Now that our app is ready for databinding, it's on to the next portion of this guide, which will involve setting up the file structure, and creating our activities.
-TODO: Add Link to next branch
+[Next Step: File Structure, Base Classes, and ViewModel](https://github.com/khuckins/android_databinding_MVVM_guide/tree/2-Activities-File-Structure)
