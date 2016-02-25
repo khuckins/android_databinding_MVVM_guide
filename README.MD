@@ -44,23 +44,24 @@ public static Intent getStartIntent(Context context) {
         return new Intent(context, MainActivity.class);
 }
 ```
-3. Alright, now, if you created your Activities manually, rather than using Android Studio's templates, you'll need to add your Acitivty to AndroidManifest.xml as the default Activity.  This can be done with the following code, placed within the <application> tags.:
+
+## Finishing Touches
+1. Alright, now, if you created your Activities manually, rather than using Android Studio's templates, you'll need to add your Acitivty to AndroidManifest.xml as the default Activity.  This can be done with the following code, placed within the <application> tags.:
  ```
-<activity
-  android:label="MVVM Sample Project"
-  android:name=".view.MainActivity" >
+<activity  android:label="MVVM Sample Project"
+  android:name=".view.MainActivity">
     <intent-filter >
         <action android:name="android.intent.action.MAIN" />
         <category android:name="android.intent.category.LAUNCHER" />
     </intent-filter>
  </activity>
  ```
-4. Now you're set up to use MVVM properly.  Build the project, and your errors should be gone.  Where can we take this?  Say I want to add a Toolbar.  Normally, I would have to use the following code:
+2: Now you're set up to use MVVM properly.  Build the project, and your errors should be gone.  Where can we take this?  Say I want to add a Toolbar.  Normally, I would have to use the following code:
 ```
 Toolbar toolbar = (Toolbar) findViewById(toolbar)
 setSupportActionBar(toolbar);
 ```
-Two lines in the java, nto so bad, right?  But whenever we want to do sometihng to a TextView, or any other object in our layout, we have to keep findViewById'ing.  It's pretty annoying.  Let's chop the lines of code in half.  That mainBinding variable should do the trick.  Try this:
+Two lines in the java, not so bad, right?  But whenever we want to do sometihng to a TextView, or any other object in our layout, we have to keep findViewById'ing.  It's pretty annoying.  Let's chop the lines of code in half.  That mainBinding variable should do the trick.  Try this:
 ```
 setSupportActionBar(mainBinding.toolbar);
 ```
