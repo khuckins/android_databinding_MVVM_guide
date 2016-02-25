@@ -6,7 +6,7 @@ Provide Android developers with a current, up to date example project and guide 
 ## Table of Contents
 1. [Intro & Gradle Setup](https://github.com/khuckins/android_databinding_MVVM_guide/tree/master)
 2. [File Structure, Base Classes, and ViewModel](https://github.com/khuckins/android_databinding_MVVM_guide/tree/2-Activities-File-Structure)
-3. View
+3. [View](https://github.com/khuckins/android_databinding_MVVM_guide/tree/3-View)
 
 ## Step 1: Setting up our File Structure
 1. As we're using MVVM, to keep our code nice and organized, we're going to create some file structure for our Java classes.  Let's go with something a bit simple.  Create the following folder structure:
