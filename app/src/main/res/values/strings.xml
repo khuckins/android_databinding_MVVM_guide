@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">MVVM Sample Project</string>
+    <string name="action_settings">settings</string>
 </resources>

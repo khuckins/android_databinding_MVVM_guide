@@ -6,35 +6,67 @@ Provide Android developers with a current, up to date example project and guide 
 ## Table of Contents
 1. [Intro & Gradle Setup](https://github.com/khuckins/android_databinding_MVVM_guide/tree/master)
 2. [File Structure, Base Classes, and ViewModel](https://github.com/khuckins/android_databinding_MVVM_guide/tree/2-Activities-File-Structure)
-3. View
+3. [View](https://github.com/khuckins/android_databinding_MVVM_guide/tree/3-View)
 
-## Step 1: Setting up our File Structure
-1. As we're using MVVM, to keep our code nice and organized, we're going to create some file structure for our Java classes.  Let's go with something a bit simple.  Create the following folder structure:
+## Step 1: Layout
+We began this tutorial by not generating any Activities.  This is where we start.  Under the `res` folder, create a new android resource directory, setting the resource type to *layout*.  This will automatically set the name to layout.  We'll be setting this layout up from scratch to show you how it should be put together.  Any future activities you create may be created as you normally would, but will require certain modifications that we'll make clear by using this method.
+1. Begin with a <layout> tag.  We'll be wrapping all the content of this activity layout inside this tag.  As such, we'll want to define our xmlns attributes here as well.
+2. Just under our opening <layout> tag, we're going to add a <data> tag.  It will have no attributes.  Between it's opening and closing, we'll add a <variable /> tag, with the following attributes:
+- name="viewModel"
+- type="com.example.mvvmsampleproject.viewmodel.MainViewModel"
+The type will be path to your MainViewModel class.
+3. At this point, you should be able to put in any content you would regularly place in your layouts after the closing <data> tag. YOu should have something like the following:
 ```
-java/com/example/mvvmsampleproject/
-    /model
-    /view
-    /viewmodel
-```
-## Step 2: Base Classes
-1. Now that we have this structure built out, let's create some base classes.  This isn't strictly required, but it will help us reduce our code duplication, especially when we apply it to a full project.  In our `view` folder, create `BaseActivity.java`, and in our `viewmodel` folder, create `ViewModel.java`.  
-- ViewModel will be an interface with only a single line, `void destroy();`.  More code may be added to ViewModel depending on what you'll be reusing between multiple ViewModels in your own project.
-- BaseActivity extends AppCompatActivity.  To better support NavigationViews, we'll also implement `NavigationView.onNavigationItemSelectedListener`.  We'll be importing FragmentManager, NavigationView, AppCompatActivity, and MenuItem.  In BaseActivity, we'll go ahead and put in the code to handle onOptionsItemSelected and onNavigationItemSelected
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
-2. You could, at this point, use this opportunity to start building out any base models you'd like to use in your app.  This should be fairly straightforward(you're essentially building POJOs), so we won't cover this.  These would be placed in our `model` folder.
+    <data>
+        <variable name="viewModel" type="com.example.mvvmsampleproject.viewmodel.MainViewModel"/>
+    </data>
 
-## Step 3: Creating our ViewModel
-With our ViewModel ready, let's go ahead and create a new class in our `viewmodel` folder.  Name it `MainViewModel.java`. This ViewModel will be handling our view.  Note that in more complex apps, you'll likely need multiple ViewModels for your Views.  We'll stick to one ViewModel and one View for this tutorial.
-1. Import `Context` and `android.databinding.BaseObservable`.  If BaseObservable is not found, don't worry.  The databinding feature generates several classes, and this is one of them.  Once we've finished section 3, we'll build the project, and Android Studio should have no problem finding BaseObservable.
-2. Now, for the actual class itself, we'll *extend* `BaseObservable` and *implement* `ViewModel`.  This will allow our ViewModel to move information between our views and our models.
-3. Instantiate Context as `context`, then add the following constructor:
-```
-public MainViewModel(Context context) {
-        this.context = context;
-   }
-```
-Great! Now we can make use of this ViewModel in our View.  But that's later.  For now, there's one more step:
-4. Creade an Overrided function for our void destroy().  This time, we'll actually give it something to do though.  set `context` to `null`.  Now whenever the ViewModel is destroyed(say, we'ves shut down the app), we'll avoid any potential issues with unexpected data.
+    YOUR CONTENT HERE
 
-## [Previous Step: Intro & Gradle Setup](https://github.com/khuckins/android_databinding_MVVM_guide/tree/master)
-## [Next Step: View](https://github.com/khuckins/android_databinding_MVVM_guide/tree/3-View)
+</layout>
+```
+
+## MainActivity.java
+Now that we have our XML view, it's time to add the Java side to this.  This is the final step to having a finished skeleton for an MVVM architected Android app using Databinding.  This file will be largley the same as a normal Java Activity class.
+1. Once you've built out a normal Activity Class(At this point, I'd recommend creating a new Activity to use as a template), Instantiate the following variables:
+```
+private MainViewModel mainViewModel;
+private ActivityMainBinding mainBinding;
+```
+Notice those red squigglies under mainBinding?  Those, like BaseObservable in the previous section, should resolve themselves once you build your project at the end of this section.
+2. Follow your varaibles with this function, placed above your onCreate:
+```
+public static Intent getStartIntent(Context context) {
+        return new Intent(context, MainActivity.class);
+}
+```
+3. Alright, now, if you created your Activities manually, rather than using Android Studio's templates, you'll need to add your Acitivty to AndroidManifest.xml as the default Activity.  This can be done with the following code, placed within the <application> tags.:
+ ```
+<activity
+  android:label="MVVM Sample Project"
+  android:name=".view.MainActivity" >
+    <intent-filter >
+        <action android:name="android.intent.action.MAIN" />
+        <category android:name="android.intent.category.LAUNCHER" />
+    </intent-filter>
+ </activity>
+ ```
+4. Now you're set up to use MVVM properly.  Build the project, and your errors should be gone.  Where can we take this?  Say I want to add a Toolbar.  Normally, I would have to use the following code:
+```
+Toolbar toolbar = (Toolbar) findViewById(toolbar)
+setSupportActionBar(toolbar);
+```
+Two lines in the java, nto so bad, right?  But whenever we want to do sometihng to a TextView, or any other object in our layout, we have to keep findViewById'ing.  It's pretty annoying.  Let's chop the lines of code in half.  That mainBinding variable should do the trick.  Try this:
+```
+setSupportActionBar(mainBinding.toolbar);
+```
+Now we've got our toolbar working properly.
+
+## Cool, cool, you've reduced the amount of code I have to write.  But what else do I get out of this?
+Testability have become much easier.  You can now reliably unit test your models and xml objects.  Less time spent writing boilerplate, less time spent mapping out just how you're going to write your tests.
+
+## [Previous Step: File Structure, Base Classes, and ViewModel](https://github.com/khuckins/android_databinding_MVVM_guide/tree/2-Activities-File-Structure)
