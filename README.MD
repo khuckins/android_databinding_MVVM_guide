@@ -8,6 +8,9 @@ Provide Android developers with a current, up to date example project and guide 
 2. [File Structure, Base Classes, and ViewModel](https://github.com/khuckins/android_databinding_MVVM_guide/tree/2-Activities-File-Structure)
 3. [View](https://github.com/khuckins/android_databinding_MVVM_guide/tree/3-View)
 
+## Intro to Section 2:
+In this section, we'll build out our File/Folder Structure, setting the organizational structure that will help keep our code neat and organized.  We'll create a couple base classes in order to reduce code duplication later, and then create our Viewmodels, setting the stage for the next section, where we'll connect it all to our views.
+
 ## Step 1: Setting up our File Structure
 1. As we're using MVVM, to keep our code nice and organized, we're going to create some file structure for our Java classes.  Let's go with something a bit simple.  Create the following folder structure:
 ```
@@ -34,7 +37,7 @@ public MainViewModel(Context context) {
    }
 ```
 Great! Now we can make use of this ViewModel in our View.  But that's later.  For now, there's one more step:
-4. Creade an Overrided function for our void destroy().  This time, we'll actually give it something to do though.  set `context` to `null`.  Now whenever the ViewModel is destroyed(say, we'ves shut down the app), we'll avoid any potential issues with unexpected data.
+4. Create an Overrided function for our void destroy().  This time, we'll actually give it something to do though.  set `context` to `null`.  Now whenever the ViewModel is destroyed(say, we've shut down the app), we'll avoid any potential issues with unexpected data.
 
 ## [Previous Step: Intro & Gradle Setup](https://github.com/khuckins/android_databinding_MVVM_guide/tree/master)
 ## [Next Step: View](https://github.com/khuckins/android_databinding_MVVM_guide/tree/3-View)
