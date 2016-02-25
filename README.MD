@@ -8,6 +8,9 @@ Provide Android developers with a current, up to date example project and guide 
 2. [File Structure, Base Classes, and ViewModel](https://github.com/khuckins/android_databinding_MVVM_guide/tree/2-Activities-File-Structure)
 3. [View](https://github.com/khuckins/android_databinding_MVVM_guide/tree/3-View)
 
+## Intro to Section 3
+In this final section, we'll build out our Views, starting with our XML layouts, and introduce the `<layout>` and `<data>` tags.  We'll discover how to set our views up to work with our viewmodels.  Then we'll build out the Java portion of our views, and finally, add some finishing touches.  We'll go over what we've learned, and look at where we can apply our Skeleton MVVM project next.
+
 ## Step 1: Layout
 We began this tutorial by not generating any Activities.  This is where we start.  Under the `res` folder, create a new android resource directory, setting the resource type to *layout*.  This will automatically set the name to layout.  We'll be setting this layout up from scratch to show you how it should be put together.  Any future activities you create may be created as you normally would, but will require certain modifications that we'll make clear by using this method.
 1. Begin with a <layout> tag.  We'll be wrapping all the content of this activity layout inside this tag.  As such, we'll want to define our xmlns attributes here as well.
@@ -15,7 +18,7 @@ We began this tutorial by not generating any Activities.  This is where we start
 - name="viewModel"
 - type="com.example.mvvmsampleproject.viewmodel.MainViewModel"
 The type will be path to your MainViewModel class.
-3. At this point, you should be able to put in any content you would regularly place in your layouts after the closing <data> tag. YOu should have something like the following:
+3. At this point, you should be able to put in any content you would regularly place in your layouts after the closing <data> tag. You should have something like the following:
 ```
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -68,6 +71,9 @@ setSupportActionBar(mainBinding.toolbar);
 Now we've got our toolbar working properly.
 
 ## Cool, cool, you've reduced the amount of code I have to write.  But what else do I get out of this?
-Testability have become much easier.  You can now reliably unit test your models and xml objects.  Less time spent writing boilerplate, less time spent mapping out just how you're going to write your tests.
+Testability have become much easier.  You can now reliably unit test your models and xml objects.  Less time spent writing boilerplate, less time spent mapping out just how you're going to write your tests.  What you gain from this tutorial is the ability to use a widely used architectural structure, without having to rely on third-party libraries. The benefits MVVM are well documented, and if you're reading this, you're already aware of them.
+
+## Where do I go from here?
+Play with this skeleton as a base for tutorial projects, such as the ones on [Google Codelabs](https://codelabs.developers.google.com/) ,until you're comfortable enough to use it on a full-on project.  Play with it.  Mess around with the skeleton and see what you can do to it and still have it work.  Apply it to an old project, or even start something new with it.  For the code in this final step, I've applied the tabs from the Material Design Codelab, so you can see that any guides you follow will still be applicable, just with some minor changes behind the scenes.
 
 ## [Previous Step: File Structure, Base Classes, and ViewModel](https://github.com/khuckins/android_databinding_MVVM_guide/tree/2-Activities-File-Structure)
